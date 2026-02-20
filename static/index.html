@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MindEase — AI Mental Health Companion</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="app">
+
+    <!-- ── Header ─────────────────────────────────────────────────── -->
+    <header class="header">
+      <div class="header-brand">
+        <div class="logo-icon-wrap" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a5 5 0 0 1 5 5 5 5 0 0 1-2.5 4.33A5 5 0 0 1 17 16H7a5 5 0 0 1 2.5-4.67A5 5 0 0 1 7 7a5 5 0 0 1 5-5z"/>
+            <line x1="12" y1="16" x2="12" y2="22"/>
+            <line x1="9"  y1="22" x2="15" y2="22"/>
+          </svg>
+        </div>
+        <div>
+          <div class="logo-text">MindEase</div>
+          <div class="logo-sub">Powered by Llama &bull; Private &amp; Local</div>
+        </div>
+        <div class="status-indicator" title="Sage is online and ready">
+          <span class="status-dot"></span>
+          <span class="status-text">Online</span>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <span class="session-pill" id="sessionPill" title="Your session ID">
+          Session <span id="sessionShort">—</span>
+        </span>
+
+        <!-- Dark mode toggle -->
+        <label class="theme-switch" title="Toggle dark mode" aria-label="Toggle dark mode">
+          <input type="checkbox" id="themeToggle" />
+          <span class="theme-track">
+            <span class="theme-thumb"></span>
+            <span class="theme-icon sun">&#9728;</span>
+            <span class="theme-icon moon">&#9790;</span>
+          </span>
+        </label>
+
+        <button class="btn-new-session" id="clearBtn" title="Start a new conversation">
+          New Chat
+        </button>
+        <a class="btn-docs" href="/docs" target="_blank" title="API documentation">
+          API Docs
+        </a>
+      </div>
+    </header>
+
+    <!-- ── Disclaimer banner ──────────────────────────────────────── -->
+    <div class="top-disclaimer" role="note">
+      <span class="disclaimer-icon">&#9432;</span>
+      <span>
+        <strong>Sage</strong> is an AI companion — <strong>not a replacement for professional care</strong>.
+        For emergencies, call <strong>988</strong> or text HOME to <strong>741741</strong>.
+      </span>
+    </div>
+
+    <!-- ── Chat area ──────────────────────────────────────────────── -->
+    <main class="chat-area" id="chatArea" role="log" aria-live="polite" aria-label="Conversation">
+
+      <!-- Welcome message -->
+      <div class="msg-row bot-row" id="welcomeMsg">
+        <div class="avatar bot-avatar" aria-hidden="true">S</div>
+        <div class="bubble bot-bubble welcome-bubble">
+          <p class="welcome-greeting">Hi, I'm <strong>Sage</strong> &#x1F331;</p>
+          <p>I'm here to listen, support, and guide you — with empathy and evidence-based techniques. Everything stays private on your device.</p>
+          <div class="quick-prompts">
+            <span class="qp-label">Try asking:</span>
+            <button class="qp-btn" data-prompt="I've been feeling anxious about work lately">Anxious about work</button>
+            <button class="qp-btn" data-prompt="I can't sleep and feel overwhelmed">Can't sleep</button>
+            <button class="qp-btn" data-prompt="I feel really down and hopeless">Feeling down</button>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- ── Crisis banner (hidden until triggered) ─────────────────── -->
+    <div class="crisis-banner hidden" id="crisisBanner" role="alert" aria-live="assertive">
+      <div class="crisis-banner-inner">
+        <div class="crisis-header">
+          <span class="crisis-icon" aria-hidden="true">&#9888;</span>
+          <strong id="crisisTitle">Crisis Resources</strong>
+          <button class="crisis-close" id="crisisClose" aria-label="Close crisis banner">&times;</button>
+        </div>
+        <p id="crisisSubtitle" class="crisis-subtitle"></p>
+        <div class="crisis-resources" id="crisisResources"></div>
+      </div>
+    </div>
+
+    <!-- ── Input area ─────────────────────────────────────────────── -->
+    <footer class="input-area">
+      <div class="input-row">
+        <div class="input-wrapper">
+          <textarea
+            id="messageInput"
+            class="message-input"
+            placeholder="Share what's on your mind..."
+            rows="1"
+            aria-label="Your message"
+            maxlength="2000"
+          ></textarea>
+        </div>
+        <button id="sendBtn" class="btn-send" aria-label="Send message">
+          <span id="sendIcon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </span>
+          <span id="sendSpinner" class="spinner hidden" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="input-footer">
+        <span class="char-count" id="charCount">0 / 2000</span>
+        <span class="input-hint">Press <kbd>Enter</kbd> to send &bull; <kbd>Shift+Enter</kbd> for newline</span>
+      </div>
+    </footer>
+
+  </div><!-- /.app -->
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
